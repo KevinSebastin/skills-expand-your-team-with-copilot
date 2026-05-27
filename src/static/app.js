@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const schoolName = "Mergington High School";
+
   // DOM elements
   const activitiesList = document.getElementById("activities-list");
   const messageDiv = document.getElementById("message");
@@ -500,10 +502,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const formattedSchedule = formatSchedule(details);
     const baseUrl = `${window.location.origin}${window.location.pathname}`;
     const shareUrl = `${baseUrl}?activity=${encodeURIComponent(name)}`;
-    const shareText = `Check out ${name} at Mergington High School. Schedule: ${formattedSchedule}`;
+    const shareText = `Check out ${name} at ${schoolName}. Schedule: ${formattedSchedule}`;
     const shareMessage = `${shareText} ${shareUrl}`;
     const encodedShareMessage = encodeURIComponent(shareMessage);
-    const emailSubject = encodeURIComponent(`${name} at Mergington High School`);
+    const emailSubject = encodeURIComponent(`${name} at ${schoolName}`);
     const emailBody = encodeURIComponent(`${shareText}\n\n${shareUrl}`);
 
     // Create activity tag
