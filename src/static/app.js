@@ -498,6 +498,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Format the schedule using the new helper function
     const formattedSchedule = formatSchedule(details);
+    const baseUrl = `${window.location.origin}${window.location.pathname}`;
+    const shareUrl = `${baseUrl}?activity=${encodeURIComponent(name)}`;
+    const shareText = `Check out ${name} at Mergington High School! ${details.description} Schedule: ${formattedSchedule}`;
+    const shareMessage = `${shareText} ${shareUrl}`;
+    const encodedShareMessage = encodeURIComponent(shareMessage);
+    const encodedShareUrl = encodeURIComponent(shareUrl);
+    const emailSubject = encodeURIComponent(`${name} at Mergington High School`);
+    const emailBody = encodeURIComponent(`${shareText}\n\n${shareUrl}`);
 
     // Create activity tag
     const tagHtml = `
@@ -568,6 +576,33 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         `
         }
+      </div>
+      <div class="share-actions" aria-label="Share ${name}">
+        <a
+          class="share-button share-whatsapp"
+          href="https://wa.me/?text=${encodedShareMessage}"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share ${name} on WhatsApp"
+        >
+          WhatsApp
+        </a>
+        <a
+          class="share-button share-x"
+          href="https://twitter.com/intent/tweet?text=${encodedShareMessage}&url=${encodedShareUrl}"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share ${name} on X"
+        >
+          X
+        </a>
+        <a
+          class="share-button share-email"
+          href="mailto:?subject=${emailSubject}&body=${emailBody}"
+          aria-label="Share ${name} by email"
+        >
+          Email
+        </a>
       </div>
     `;
 
