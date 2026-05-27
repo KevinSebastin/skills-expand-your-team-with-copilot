@@ -578,13 +578,13 @@ document.addEventListener("DOMContentLoaded", () => {
         `
         }
       </div>
-      <div class="share-actions" aria-label="Share ${name}">
+      <div class="share-actions" aria-label="Share this activity">
         <a
           class="share-button share-whatsapp"
           href="https://wa.me/?text=${encodedShareMessage}"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Share ${name} on WhatsApp"
+          aria-label="Share on WhatsApp"
         >
           WhatsApp
         </a>
@@ -593,14 +593,15 @@ document.addEventListener("DOMContentLoaded", () => {
           href="https://twitter.com/intent/tweet?text=${encodedShareMessage}"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Share ${name} on X"
+          aria-label="Share on X"
         >
           X
         </a>
         <a
           class="share-button share-email"
           href="mailto:?subject=${emailSubject}&body=${emailBody}"
-          aria-label="Share ${name} by email"
+          aria-label="Share by email"
+        >
         >
           Email
         </a>
