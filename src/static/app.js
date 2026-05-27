@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("login-form");
   const closeLoginModal = document.querySelector(".close-login-modal");
   const loginMessage = document.getElementById("login-message");
+  const themeToggleButton = document.getElementById("theme-toggle");
+  const themeLabel = themeToggleButton?.querySelector(".theme-label");
+  const themeIcon = themeToggleButton?.querySelector(".theme-icon");
 
   // Activity categories with corresponding colors
   const activityTypes = {
@@ -50,6 +53,35 @@ document.addEventListener("DOMContentLoaded", () => {
     afternoon: { start: "15:00", end: "18:00" }, // After school hours
     weekend: { days: ["Saturday", "Sunday"] }, // Weekend days
   };
+
+  // Theme state
+  let currentTheme = null;
+
+  function applyTheme(theme) {
+    currentTheme = theme === "dark" ? "dark" : "light";
+    document.body.classList.toggle("dark-mode", currentTheme === "dark");
+    localStorage.setItem("themePreference", currentTheme);
+
+    const isDarkMode = currentTheme === "dark";
+
+    if (themeLabel && themeIcon && themeToggleButton) {
+      themeLabel.textContent = isDarkMode ? "Light Mode" : "Dark Mode";
+      themeIcon.textContent = isDarkMode ? "☀️" : "🌙";
+      themeToggleButton.setAttribute("aria-pressed", String(isDarkMode));
+    }
+  }
+
+  function initializeTheme() {
+    const savedTheme = localStorage.getItem("themePreference");
+
+    if (savedTheme === "dark" || savedTheme === "light") {
+      applyTheme(savedTheme);
+      return;
+    }
+
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    applyTheme(prefersDark ? "dark" : "light");
+  }
 
   // Initialize filters from active elements
   function initializeFilters() {
@@ -238,6 +270,9 @@ document.addEventListener("DOMContentLoaded", () => {
   loginButton.addEventListener("click", openLoginModal);
   logoutButton.addEventListener("click", logout);
   closeLoginModal.addEventListener("click", closeLoginModalHandler);
+  themeToggleButton?.addEventListener("click", () => {
+    applyTheme((currentTheme || "light") === "dark" ? "light" : "dark");
+  });
 
   // Close login modal when clicking outside
   window.addEventListener("click", (event) => {
@@ -862,6 +897,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Initialize app
+  initializeTheme();
   checkAuthentication();
   initializeFilters();
   fetchActivities();
