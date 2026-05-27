@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const schoolName = "Mergington High School";
+
   // DOM elements
   const activitiesList = document.getElementById("activities-list");
   const messageDiv = document.getElementById("message");
@@ -498,6 +500,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Format the schedule using the new helper function
     const formattedSchedule = formatSchedule(details);
+    const baseUrl = `${window.location.origin}${window.location.pathname}`;
+    const shareUrl = baseUrl;
+    const shareText = `Check out ${name} at ${schoolName}. Schedule: ${formattedSchedule}`;
+    const shareMessage = `${shareText} ${shareUrl}`;
+    const encodedShareMessage = encodeURIComponent(shareMessage);
+    const emailSubject = encodeURIComponent(`${name} at ${schoolName}`);
+    const emailBody = encodeURIComponent(`${shareText}\n\n${shareUrl}`);
 
     // Create activity tag
     const tagHtml = `
@@ -569,7 +578,47 @@ document.addEventListener("DOMContentLoaded", () => {
         `
         }
       </div>
+      <div class="share-actions" aria-label="Share this activity">
+        <a
+          class="share-button share-whatsapp"
+          href="https://wa.me/?text=${encodedShareMessage}"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on WhatsApp"
+        >
+          WhatsApp
+        </a>
+        <a
+          class="share-button share-x"
+          href="https://twitter.com/intent/tweet?text=${encodedShareMessage}"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on X"
+        >
+          X
+        </a>
+        <a
+          class="share-button share-email"
+          href="mailto:?subject=${emailSubject}&body=${emailBody}"
+          aria-label="Share by email"
+        >
+        >
+          Email
+        </a>
+      </div>
     `;
+
+    const shareActions = activityCard.querySelector(".share-actions");
+    shareActions.setAttribute("aria-label", `Share ${name}`);
+
+    const whatsappShareButton = activityCard.querySelector(".share-whatsapp");
+    whatsappShareButton.setAttribute("aria-label", `Share ${name} on WhatsApp`);
+
+    const xShareButton = activityCard.querySelector(".share-x");
+    xShareButton.setAttribute("aria-label", `Share ${name} on X`);
+
+    const emailShareButton = activityCard.querySelector(".share-email");
+    emailShareButton.setAttribute("aria-label", `Share ${name} by email`);
 
     // Add click handlers for delete buttons
     const deleteButtons = activityCard.querySelectorAll(".delete-participant");
