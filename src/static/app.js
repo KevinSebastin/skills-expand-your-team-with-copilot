@@ -608,6 +608,18 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
+    const shareActions = activityCard.querySelector(".share-actions");
+    shareActions.setAttribute("aria-label", `Share ${name}`);
+
+    const whatsappShareButton = activityCard.querySelector(".share-whatsapp");
+    whatsappShareButton.setAttribute("aria-label", `Share ${name} on WhatsApp`);
+
+    const xShareButton = activityCard.querySelector(".share-x");
+    xShareButton.setAttribute("aria-label", `Share ${name} on X`);
+
+    const emailShareButton = activityCard.querySelector(".share-email");
+    emailShareButton.setAttribute("aria-label", `Share ${name} by email`);
+
     // Add click handlers for delete buttons
     const deleteButtons = activityCard.querySelectorAll(".delete-participant");
     deleteButtons.forEach((button) => {
