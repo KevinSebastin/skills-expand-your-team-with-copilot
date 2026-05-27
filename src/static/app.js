@@ -501,7 +501,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Format the schedule using the new helper function
     const formattedSchedule = formatSchedule(details);
     const baseUrl = `${window.location.origin}${window.location.pathname}`;
-    const shareUrl = `${baseUrl}?activity=${encodeURIComponent(name)}`;
+    const shareUrl = baseUrl;
     const shareText = `Check out ${name} at ${schoolName}. Schedule: ${formattedSchedule}`;
     const shareMessage = `${shareText} ${shareUrl}`;
     const encodedShareMessage = encodeURIComponent(shareMessage);
