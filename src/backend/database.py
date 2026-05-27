@@ -121,7 +121,7 @@ initial_activities = {
         "participants": ["james@mergington.edu", "benjamin@mergington.edu"]
     },
     "Manga Maniacs": {
-        "description": "Explore the fantastic stories of the most interesting characters from Japanese Manga (graphic novels).",
+        "description": "猫とクレイジーな自動販売機と斬首 (Original Manga)",
         "schedule": "Tuesdays at 7pm",
         "schedule_details": {
             "days": ["Tuesday"],
